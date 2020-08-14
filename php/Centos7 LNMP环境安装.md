@@ -65,3 +65,36 @@ Centos7：
    修改密码：set password for root@localhost = password('123456');
 
    移除源：yum -y remove mysql57-community-release-el7-10.noarch
+
+
+【注意点：】
+
+ 1. ThinkPHP框架nginx配置
+
+
+
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+
+
+
+    fastcgi_param  PHP_VALUE  "open_basedir=/data/wwwroot/18duizhang/:/tmp/:/proc/";
+
+2. nginx站点http和htpps能同时访问
+
+   ```
+   listen       80;
+   listen 443 ssl;
+   server_name  ***.com;
+   
+   #ssl on;此处注释
+   #获取到的第一个文件的全路径
+   ssl_certificate /******.pem;
+   #=获取到的第二个文件的全路径
+   ssl_certificate_key /******.key;
+   ssl_session_timeout 5m;
+   ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+   ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+   ssl_prefer_server_ciphers on;
+   ```
+
+
